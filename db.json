@@ -1,0 +1,32 @@
+{
+  "productList": [
+    {
+      "productName": "apple",
+      "category": "Fruits",
+      "freshness": "brand new",
+      "price": 100,
+      "comment": "goosd stuff",
+      "date": "2022-03-17T23:00:00.000Z",
+      "id": 1
+    },
+    {
+      "productName": "apple",
+      "category": "Fruits",
+      "freshness": "brand new",
+      "price": 100,
+      "comment": "goosd stuff",
+      "date": "2022-03-17T23:00:00.000Z",
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
