@@ -15,7 +15,7 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class AppComponent implements OnInit{
   title = 'products-app';
-  displayedColumns: string[] = ['productName', 'category','freshness','price', 'comment','date'];
+  displayedColumns: string[] = ['productName', 'category','freshness','price', 'comment','date','action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,7 +31,12 @@ export class AppComponent implements OnInit{
   openDialog() {
     this.dialog.open(DialogComponent, {
      width:'30%'
-    });
+    }).afterClosed().subscribe(val=>{
+      if(val=='save'){
+        this.getAllProducts();
+
+      }
+    })
   }
   getAllProducts(){
     this.api.getProduct()
@@ -42,6 +47,30 @@ export class AppComponent implements OnInit{
           this.dataSource.sort= this.sort;
           console.log(res);
     },
+        error:(err)=>{
+          alert("something went wrong whiling fetching for data");
+        }
+      })
+  }
+
+  editProducts(row:any){
+    this.dialog.open(DialogComponent,{
+      width:'30%',
+      data:row
+    }).afterClosed().subscribe(val=>{
+      if(val=='update'){
+        this.getAllProducts();
+
+      }
+    })
+  }
+  deleteProduct(row:any){
+    this.api.deleteProduct(row.id)
+      .subscribe({
+        next:(res)=>{
+         alert("product deleted succefully");
+         this.getAllProducts();
+ },
         error:(err)=>{
           alert("something went wrong whiling fetching for data");
         }
